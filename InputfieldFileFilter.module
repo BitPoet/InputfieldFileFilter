@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Add live filter to the head of file input fields
+ */
+
+class InputfieldFileFilter extends Wire implements Module {
+	public static function getModuleInfo() {
+		return array(
+			"title"		=>	__('File Filter', __FILE__),
+			"summary"	=>	__('Add live filtering capability to InputfieldFile', __FILE__),
+			"version"	=>	"0.0.4",
+			"autoload"	=>	true,
+		);
+	}
+	
+	public function init() {
+		$qstring = "?v=" . filemtime("./InputfieldFileFilter.js");
+		$this->config->scripts->add($this->config->urls->{$this->className()} . "InputfieldFileFilter.js" . $qstring);
+		$this->addHookAfter("InputfieldFile::renderList", $this, "addFilterInput");
+	}
+	
+	public function addFilterInput(HookEvent $event) {
+		$out = $event->return;
+		$field = $event->object;
+		$val = $event->arguments(0);
+
+		$status = $this->_("[displaying {0} of {1} files]");
+		$cur = str_replace(array('{0}', '{1}'), count($val), $status);
+		
+		$inject = "<div class='InputfieldContent filefilter'><span class='fa fa-search'> </span> <input type='text' data-for='{$field->id}' size='50' onkeyup='updateFileFilter(this);' /> <span class='filefilterinfo' data-tpl='{$status}'>{$cur}</span>\n" .
+				  "<p class='description'>" . $this->_("Start typing in the text field above to filter the list of files, clear to show all.") . "</p>\n" .
+				  "</div>\n";
+		$event->return = $inject . $out;
+	}
+}
+
