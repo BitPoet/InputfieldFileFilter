@@ -18,3 +18,7 @@ It adds a textbox on top of file input fields which allows you to perform a (jQu
 ## Install
 
 Download the repository as a zip file and extract the contained folder into site/modules. Klick "Modules" => "Refresh" in the PW backend, then "Install" next to the module. Open any page for editing that has a populated file inputfield attached and test.
+
+## Screenshot
+
+![Screenshot InputfieldFileFilter](https://bitpoet.github.io/img/screenshot-inputfieldfilefilter-1.png)
