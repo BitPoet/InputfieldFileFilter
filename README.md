@@ -22,3 +22,13 @@ Download the repository as a zip file and extract the contained folder into site
 ## Screenshot
 
 ![Screenshot InputfieldFileFilter](https://bitpoet.github.io/img/screenshot-inputfieldfilefilter-1.png)
+
+## ToDo
+
+- optimize look&feel
+- add option to choose which derived inputfield types can be filtered in module settings
+- check that no issues arise through the hiding of file items
+- filtering should not trigger "unsaved changes" warnings when leaving the page editor
+- check behavior when frontend editing
+- add configurable option to also filter description fields
+
