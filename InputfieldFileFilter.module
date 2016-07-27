@@ -9,7 +9,7 @@ class InputfieldFileFilter extends Wire implements Module {
 		return array(
 			"title"		=>	__('File Filter', __FILE__),
 			"summary"	=>	__('Add live filtering capability to InputfieldFile', __FILE__),
-			"version"	=>	"0.0.4",
+			"version"	=>	"0.0.5",
 			"autoload"	=>	true,
 		);
 	}
@@ -21,8 +21,10 @@ class InputfieldFileFilter extends Wire implements Module {
 	}
 	
 	public function addFilterInput(HookEvent $event) {
-		$out = $event->return;
 		$field = $event->object;
+		if($field->className() != "InputfieldFile") return;
+
+		$out = $event->return;
 		$val = $event->arguments(0);
 
 		$status = $this->_("[displaying {0} of {1} files]");
